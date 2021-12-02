@@ -14,7 +14,7 @@ import {ref, createRef} from 'lit/directives/ref.js';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement('cdtr-iframe-input')
+@customElement('input-iframe')
 export class MyElement extends LitElement {
   input: HTMLInputElement;
   styleTag: HTMLStyleElement;
@@ -63,6 +63,9 @@ export class MyElement extends LitElement {
           this.styleTag.innerHTML = styles;
           iframeElement.contentWindow?.document.body.appendChild(this.styleTag);
           iframeElement.contentWindow?.document.body.appendChild(this.input);
+          const inputRect:DOMRect = this.input.getBoundingClientRect();
+          iframeElement.height= inputRect.height +"px";
+          iframeElement.width= inputRect.width +"px";
         },
         {once: true}
       );
@@ -84,11 +87,13 @@ export class MyElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'cdtr-iframe-input': MyElement;
+    'input-iframe': MyElement;
   }
 }
 const styles = `
-
+body{
+  margin:0;
+}
 input {
   display: inline-block;
   width: 100%;
