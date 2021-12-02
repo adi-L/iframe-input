@@ -14,7 +14,7 @@ if (!['dev', 'prod'].includes(mode)) {
 export default {
   nodeResolve: {exportConditions: mode === 'dev' ? ['development'] : []},
   preserveSymlinks: true,
-  rootDir: 'docs',
+  rootDir: '',
   plugins: [
     legacyPlugin({
       polyfills: {
